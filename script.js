@@ -1,3 +1,5 @@
+let message = document.getElementById("message");
+let showButton = document.querySelector("#restart-button");
 let canvas = document.getElementById("snake");
 let context = canvas.getContext("2d");
 let box = 32;
@@ -45,6 +47,14 @@ function iniciarJogo() {
   if (snake[0].y > 15 * box && direction === "down") snake[0].y = 0;
   if (snake[0].y < 0 && direction === "up") snake[0].y = 16 * box;
 
+  for (let i = 1; i < snake.length; i++) {
+    if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
+      clearInterval(jogo);
+      message.innerHTML = "Game over :)";
+      // showButton.classList.add("hidden");
+    }
+  }
+
   criarBG();
   criarCobrinha();
   drawFood();
@@ -73,3 +83,7 @@ function iniciarJogo() {
 }
 
 let jogo = setInterval(iniciarJogo, 100);
+
+// function restart() {
+//   setInterval(iniciarJogo, 100);
+// }
